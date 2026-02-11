@@ -4,7 +4,6 @@ import { useState, type FormEvent } from "react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Loader2 } from "lucide-react"
 
@@ -13,44 +12,42 @@ export function DemoSubmissionForm() {
   const [errorMessage, setErrorMessage] = useState("")
   const [charCount, setCharCount] = useState(0)
 
-
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus("submitting")
     setErrorMessage("")
 
     const formData = new FormData(e.currentTarget)
-
-    const actionUrl = "https://formspree.io/f/meelekpb"
-
-    if (!actionUrl) {
-      setStatus("error")
-      setErrorMessage("Form action URL is not configured. Please set NEXT_PUBLIC_FORM_ACTION.")
-      return
-    }
+    
+    // Convert FormData to JSON object for Formspree
+    const data: Record<string, string> = {}
+    formData.forEach((value, key) => {
+      data[key] = value.toString()
+    })
 
     try {
-      const res = await fetch(actionUrl, {
+      const res = await fetch("https://formspree.io/f/meelekpb", {
         method: "POST",
-        body: formData,
         headers: {
-    Accept: "application/json",
-  },
-})
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
 
-     // Treat any 2xx as success.
-    if (res.status >= 200 && res.status < 300) {
-  setStatus("success")
-  return
-}
+      if (!res.ok) {
+        throw new Error(`Submission failed (${res.status})`)
+      }
 
-throw new Error(`Submission failed (${res.status})`)
+      setStatus("success")
+      // Scroll to top to show success message
+      window.scrollTo({ top: 0, behavior: "smooth" })
     } catch (err) {
       setStatus("error")
       setErrorMessage(
         err instanceof Error ? err.message : "Something went wrong. Please try again."
       )
     }
+  }
 
   if (status === "success") {
     return (
@@ -62,7 +59,7 @@ throw new Error(`Submission failed (${res.status})`)
           Demo submitted
         </h2>
         <p className="max-w-sm text-[13px] text-muted-foreground leading-relaxed">
-          {"Thanks for submitting. We'll review your demo and follow up a few days before the event."}
+          Thanks for submitting your demo! We'll review it and follow up soon.
         </p>
       </div>
     )
