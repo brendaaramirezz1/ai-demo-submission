@@ -51,19 +51,13 @@ export function DemoSubmissionForm() {
 
   if (status === "success") {
     return (
-      <div className="relative">
-        {/* Blur overlay for background text */}
-        <div className="absolute inset-0 backdrop-blur-sm bg-black/40 -mx-4 -my-8 rounded-lg"></div>
-        
-        {/* Success message - centered and prominent */}
-        <div className="relative flex flex-col items-center gap-4 py-20 text-center">
-          <div className="flex items-center justify-center rounded-full border-2 border-foreground p-4">
-            <CheckCircle2 className="size-8 text-foreground" />
-          </div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">
+      <div className="rounded-md border border-border bg-background/50 backdrop-blur-sm px-6 py-10 text-center">
+        <div className="flex flex-col items-center gap-2">
+          <CheckCircle2 className="size-5 text-foreground mb-1" />
+          <h2 className="text-heading-20 text-foreground">
             Demo submitted
           </h2>
-          <p className="max-w-md text-base text-muted-foreground leading-relaxed">
+          <p className="text-copy-14 text-muted-foreground max-w-sm">
             Thanks for submitting your demo! We'll review it and follow up soon.
           </p>
         </div>
@@ -75,7 +69,7 @@ export function DemoSubmissionForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       {/* Full name */}
       <fieldset className="flex flex-col gap-1.5">
-        <Label htmlFor="full_name" className="text-[13px]">
+        <Label htmlFor="full_name" className="text-label-13">
           Full name <span className="text-muted-foreground">*</span>
         </Label>
         <Input
@@ -90,7 +84,7 @@ export function DemoSubmissionForm() {
 
       {/* Email */}
       <fieldset className="flex flex-col gap-1.5">
-        <Label htmlFor="email" className="text-[13px]">
+        <Label htmlFor="email" className="text-label-13">
           Email <span className="text-muted-foreground">*</span>
         </Label>
         <Input
@@ -106,7 +100,7 @@ export function DemoSubmissionForm() {
 
       {/* Company / team */}
       <fieldset className="flex flex-col gap-1.5">
-        <Label htmlFor="company" className="text-[13px]">Company / team</Label>
+        <Label htmlFor="company" className="text-label-13">Company / team</Label>
         <Input
           id="company"
           name="company"
@@ -118,7 +112,7 @@ export function DemoSubmissionForm() {
 
       {/* Project name */}
       <fieldset className="flex flex-col gap-1.5">
-        <Label htmlFor="project_name" className="text-[13px]">
+        <Label htmlFor="project_name" className="text-label-13">
           Project name <span className="text-muted-foreground">*</span>
         </Label>
         <Input
@@ -132,7 +126,7 @@ export function DemoSubmissionForm() {
 
       {/* What does your agent do? */}
       <fieldset className="flex flex-col gap-1.5">
-        <Label htmlFor="description" className="text-[13px]">
+        <Label htmlFor="description" className="text-label-13">
           What does your agent do? <span className="text-muted-foreground">*</span>
         </Label>
         <Textarea
@@ -144,14 +138,14 @@ export function DemoSubmissionForm() {
           className="min-h-28 bg-[#0a0a0a]"
           onChange={(e) => setCharCount(e.target.value.length)}
         />
-        <p className="text-xs text-muted-foreground text-right tabular-nums">
+        <p className="text-label-13 text-muted-foreground text-right tabular-nums">
           {charCount}/500
         </p>
       </fieldset>
 
       {/* Link */}
       <fieldset className="flex flex-col gap-1.5">
-        <Label htmlFor="link" className="text-[13px]">Link</Label>
+        <Label htmlFor="link" className="text-label-13">Link</Label>
         <Input
           id="link"
           name="link"
@@ -159,14 +153,14 @@ export function DemoSubmissionForm() {
           placeholder="https://github.com/..."
           className="h-10 bg-[#0a0a0a]"
         />
-        <p className="text-xs text-muted-foreground">
+        <p className="text-label-13 text-muted-foreground">
           GitHub, live demo, or documentation
         </p>
       </fieldset>
 
       {/* Anything else */}
       <fieldset className="flex flex-col gap-1.5">
-        <Label htmlFor="notes" className="text-[13px]">Anything else we should know?</Label>
+        <Label htmlFor="notes" className="text-label-13">Anything else we should know?</Label>
         <Textarea
           id="notes"
           name="notes"
@@ -178,7 +172,7 @@ export function DemoSubmissionForm() {
       {/* Error message */}
       {status === "error" && (
         <div className="rounded-md border border-destructive/50 bg-destructive/10 px-4 py-3">
-          <p className="text-sm text-destructive">{errorMessage}</p>
+          <p className="text-copy-14 text-destructive">{errorMessage}</p>
         </div>
       )}
 
