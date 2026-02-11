@@ -33,7 +33,10 @@ export function DemoSubmissionForm() {
       const res = await fetch(actionUrl, {
         method: "POST",
         body: formData,
-      })
+        headers: {
+    Accept: "application/json",
+  },
+})
 
       if (!res.ok) {
         throw new Error(`Submission failed (${res.status})`)
