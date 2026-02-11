@@ -21,7 +21,7 @@ export function DemoSubmissionForm() {
 
     const formData = new FormData(e.currentTarget)
 
-    const actionUrl = process.env.NEXT_PUBLIC_FORM_ACTION
+    const actionUrl = "https://formspree.io/f/meelekpb"
 
     if (!actionUrl) {
       setStatus("error")
