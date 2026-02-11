@@ -38,18 +38,19 @@ export function DemoSubmissionForm() {
   },
 })
 
-      if (!res.ok) {
-        throw new Error(`Submission failed (${res.status})`)
-      }
+     // Treat any 2xx as success.
+    if (res.status >= 200 && res.status < 300) {
+  setStatus("success")
+  return
+}
 
-      setStatus("success")
+throw new Error(`Submission failed (${res.status})`)
     } catch (err) {
       setStatus("error")
       setErrorMessage(
         err instanceof Error ? err.message : "Something went wrong. Please try again."
       )
     }
-  }
 
   if (status === "success") {
     return (
