@@ -51,16 +51,22 @@ export function DemoSubmissionForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-4 py-16 text-center">
-        <div className="flex items-center justify-center rounded-full border border-border p-3">
-          <CheckCircle2 className="size-6 text-foreground" />
+      <div className="relative">
+        {/* Blur overlay for background text */}
+        <div className="absolute inset-0 backdrop-blur-sm bg-black/40 -mx-4 -my-8 rounded-lg"></div>
+        
+        {/* Success message - centered and prominent */}
+        <div className="relative flex flex-col items-center gap-4 py-20 text-center">
+          <div className="flex items-center justify-center rounded-full border-2 border-foreground p-4">
+            <CheckCircle2 className="size-8 text-foreground" />
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">
+            Demo submitted
+          </h2>
+          <p className="max-w-md text-base text-muted-foreground leading-relaxed">
+            Thanks for submitting your demo! We'll review it and follow up soon.
+          </p>
         </div>
-        <h2 className="text-xl font-semibold tracking-tight text-foreground">
-          Demo submitted
-        </h2>
-        <p className="max-w-sm text-[13px] text-muted-foreground leading-relaxed">
-          Thanks for submitting your demo! We'll review it and follow up soon.
-        </p>
       </div>
     )
   }
